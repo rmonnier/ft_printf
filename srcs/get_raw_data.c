@@ -12,6 +12,8 @@
 
 #include "ft_printf.h"
 
+/* function that select a method to get the data */
+
 static t_bool	is_unsigned_conv(char c)
 {
 	return (c == 'u' || c == 'U' || c == 'o' || c == 'O' || c == 'x' || c == 'X' ||
@@ -27,9 +29,13 @@ char				*get_raw_data(va_list ap, t_specifiers specifiers)
 {
 	char *str;
 
-	if (is_unsigned_conv(specifiers.identifier))
+	if (specifiers.identifier == '%')
+		str = ft_strdup("%");
+	else if (is_unsigned_conv(specifiers.identifier))
 		str = unsigned_conv(ap, specifiers);
 	else if (is_signed_conv(specifiers.identifier))
 		str = signed_conv(ap, specifiers);
+	else
+		str = ft_strdup("");
 	return (str);
 }

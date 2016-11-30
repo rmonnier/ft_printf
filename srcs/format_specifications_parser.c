@@ -16,7 +16,7 @@ void get_format_specifications(char const **format, va_list ap,
 											t_specifiers *specifiers)
 {
 	while (is_flag(**format) || ft_isdigit(**format) || **format == '*' ||
-		**format == '.' || **format == ' ')
+		**format == '.' || is_length_specifier(**format) || **format == ' ')
 	{
 		if (is_flag(**format))
 			get_flags(format, specifiers);
@@ -24,6 +24,8 @@ void get_format_specifications(char const **format, va_list ap,
 			get_width(format, specifiers, ap);
 		else if (**format == '.')
 			get_precision(format, specifiers, ap);
+		else if (is_length_specifier(**format))
+			get_length_specifier(format, specifiers);
 		else if (**format == ' ')
 			(*format)++;
 	}

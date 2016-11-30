@@ -12,6 +12,8 @@
 
 #include "ft_printf.h"
 
+/* simple functions that identify usefull characters */
+
 t_bool		is_flag(char const c)
 {
 	return (c == '#' || c == '0' || c == '-' || c == ' ' || c == '+');
@@ -25,11 +27,10 @@ t_bool		is_length_specifier(char const c)
 t_bool		is_identifier(char const c)
 {
 	return (c == 'd' || c == 'D' || c == 'i' ||
-			c == 'o' || c == 'O' || c == 'x' || c == 'X' ||
-			c == 'u' || c == 'U' ||
-			c == 'b' || c == 'B' ||
-			c == 'c' || c == 'C' ||
-			c == 's' || c == 'S');
+			c == 'u' || c == 'U' || c == 'o' || c == 'O' ||
+			c == 'x' || c == 'X' || c == 'b' || c == 'B' ||
+			c == 'c' || c == 'C' || c == 's' || c == 'S' ||
+			c == 'p' || c == '%');
 }
 
 int			get_conv_base(char id)

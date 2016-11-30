@@ -6,7 +6,7 @@
 /*   By: rmonnier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/24 18:06:23 by rmonnier          #+#    #+#             */
-/*   Updated: 2016/11/30 11:19:38 by rmonnier         ###   ########.fr       */
+/*   Updated: 2016/11/30 15:26:47 by rmonnier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ char		*get_raw_data(va_list ap, t_specifiers specifiers);
 void		get_flags(const char **format, t_specifiers *specifiers);
 void		get_width(const char **format, t_specifiers *specifiers, va_list ap);
 void		get_precision(const char **format, t_specifiers *specifiers, va_list ap);
+void		get_length_specifier(char const **format, t_specifiers *specifiers);
 void		get_identifier(const char **format, t_specifiers *specifiers);
 
 char  		*unsigned_conv(va_list ap, t_specifiers specifiers);
@@ -66,6 +67,5 @@ t_bool		is_length_specifier(char const c);
 t_bool		is_identifier(char const c);
 int			get_conv_base(char id);
 void		initialize_specifiers(t_specifiers *specifiers);
-
 
 #endif

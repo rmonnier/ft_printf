@@ -12,6 +12,8 @@
 
 #include "ft_printf.h"
 
+/* functions that get each kind of specifications through parsing */
+
 void		get_flags(char const **format, t_specifiers *specifiers)
 {
 	while (is_flag(**format))
@@ -29,6 +31,7 @@ void		get_flags(char const **format, t_specifiers *specifiers)
 		(*format)++;
 	}
 }
+
 void		get_width(char const **format, t_specifiers *specifiers, va_list ap)
 {
 	if (ft_isdigit(**format))
@@ -47,6 +50,7 @@ void		get_width(char const **format, t_specifiers *specifiers, va_list ap)
 			(*format)++;
 	}
 }
+
 void		get_precision(char const **format, t_specifiers *specifiers, va_list ap)
 {
 	(*format)++;
@@ -66,11 +70,9 @@ void		get_precision(char const **format, t_specifiers *specifiers, va_list ap)
 			(*format)++;
 	}
 }
-void		get_identifier(char const **format, t_specifiers *specifiers)
-{
-	int		h;
-	int		l;
 
+void get_length_specifier(char const **format, t_specifiers *specifiers)
+{
 	while (is_length_specifier(**format))
 	{
 		if (**format == 'h')
@@ -83,7 +85,20 @@ void		get_identifier(char const **format, t_specifiers *specifiers)
 			specifiers->length.z++;
 		(*format)++;
 	}
-	if (is_identifier(**format))
+}
+
+void		get_identifier(char const **format, t_specifiers *specifiers)
+{
+	if (**format == 'p')
+	{
+		specifiers->identifier = 'x';
+		specifiers->flags.sharp = '1';
+		specifiers->length.l++;
+		(*format)++;
+	}
+	else if (is_identifier(**format))
+	{
 		specifiers->identifier = **format;
-	(*format)++;
+		(*format)++;
+	}
 }

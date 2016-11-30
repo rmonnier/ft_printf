@@ -12,6 +12,8 @@
 
 #include "ft_printf.h"
 
+/* main part of the string formatting function */
+
 static char		*get_formated_string(const char **format, va_list ap)
 {
 	t_specifiers	specifiers;
@@ -23,6 +25,8 @@ static char		*get_formated_string(const char **format, va_list ap)
 	//process_data(str, specifiers);
 	return (str);
 }
+
+/* main part of the function */
 
 int				ft_printf(const char *format, ...)
 {

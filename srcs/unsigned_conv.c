@@ -23,9 +23,9 @@ static unsigned long long get_arg(va_list ap, char id, t_length length)
 	else if (length.l == 1 || id == 'U' || id == 'O' || id == 'B')
 		output = (unsigned long long)va_arg(ap, unsigned long);
 	else if (length.h >= 2)
-		output = (unsigned long long)va_arg(ap, unsigned int);
+		output = (unsigned long long)(unsigned char)va_arg(ap, unsigned int);
 	else if (length.h == 1)
-		output = (unsigned long long)va_arg(ap, unsigned int);
+		output = (unsigned long long)(unsigned short)va_arg(ap, unsigned int);
 	else
 		output = (unsigned long long)va_arg(ap, unsigned int);
 	return (output);
