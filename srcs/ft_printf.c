@@ -22,7 +22,7 @@ static char		*get_formated_string(const char **format, va_list ap)
 	initialize_specifiers(&specifiers);
 	get_format_specifications(format, ap, &specifiers);
 	str = get_raw_data(ap, specifiers);
-	//process_data(str, specifiers);
+	process_data(&str, specifiers);
 	return (str);
 }
 
@@ -30,9 +30,9 @@ static char		*get_formated_string(const char **format, va_list ap)
 
 int				ft_printf(const char *format, ...)
 {
-	va_list		ap;
+	va_list	ap;
 	char		*s;
-	int			n;
+	int		n;
 
 	n = 0;
 	va_start(ap, format);
@@ -43,9 +43,13 @@ int				ft_printf(const char *format, ...)
 			ft_putchar(*format++);
 			n++;
 		}
+		else if (*(++format) == 'n')
+		{
+			*(va_arg(ap, int*)) = n;
+			format++;
+		}
 		else
 		{
-			format++;
 			s = get_formated_string(&format, ap);
 			ft_putstr(s);
 			n = n + ft_strlen(s);

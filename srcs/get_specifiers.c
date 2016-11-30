@@ -92,8 +92,8 @@ void		get_identifier(char const **format, t_specifiers *specifiers)
 	if (**format == 'p')
 	{
 		specifiers->identifier = 'x';
-		specifiers->flags.sharp = '1';
-		specifiers->length.l++;
+		specifiers->flags.sharp = 1;
+		specifiers->length.l = 1;
 		(*format)++;
 	}
 	else if (is_identifier(**format))

@@ -16,8 +16,7 @@
 # include "libft.h"
 # include <stdlib.h>
 # include <stdarg.h>
-
-typedef int t_bool;
+# include <stdio.h>
 
 typedef struct		s_flags
 {
@@ -49,6 +48,7 @@ int			ft_printf(const char *format, ...);
 void		get_format_specifications(char const **format, va_list ap,
 												t_specifiers *specifiers);
 char		*get_raw_data(va_list ap, t_specifiers specifiers);
+void	process_data(char **data, t_specifiers specifiers);
 
 void		get_flags(const char **format, t_specifiers *specifiers);
 void		get_width(const char **format, t_specifiers *specifiers, va_list ap);
@@ -65,6 +65,7 @@ char		*ft_itoa_base_llu(unsigned long long value, int base);
 t_bool		is_flag(const char c);
 t_bool		is_length_specifier(char const c);
 t_bool		is_identifier(char const c);
+t_bool	is_signed_conv(char c);
 int			get_conv_base(char id);
 void		initialize_specifiers(t_specifiers *specifiers);
 

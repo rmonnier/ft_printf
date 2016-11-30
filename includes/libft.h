@@ -6,7 +6,7 @@
 /*   By: rmonnier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/03 15:12:13 by rmonnier          #+#    #+#             */
-/*   Updated: 2016/11/30 14:00:52 by rmonnier         ###   ########.fr       */
+/*   Updated: 2016/11/30 20:13:02 by rmonnier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,15 @@
 # include <string.h>
 
 typedef unsigned char	t_byte;
+typedef int				t_bool;
 typedef	struct			s_list
 {
 	void				*content;
 	size_t				content_size;
 	struct s_list		*next;
 }						t_list;
+
+# define ABS(value) (Value >= 0 ? Value : -Value)
 
 int						ft_atoi(char const *str);
 void					ft_bzero(void *s, size_t n);

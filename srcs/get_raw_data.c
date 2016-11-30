@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   data_formater.c                                    :+:      :+:    :+:   */
+/*   get_raw_data.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rmonnier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/11/28 22:07:02 by rmonnier          #+#    #+#             */
-/*   Updated: 2016/11/30 11:25:26 by rmonnier         ###   ########.fr       */
+/*   Created: 2016/11/30 16:20:44 by rmonnier          #+#    #+#             */
+/*   Updated: 2016/11/30 16:20:46 by rmonnier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static t_bool	is_unsigned_conv(char c)
 			c == 'b' || c == 'B');
 }
 
-static t_bool	is_signed_conv(char c)
+t_bool	is_signed_conv(char c)
 {
 	return (c == 'd' || c == 'D' || c == 'i');
 }
