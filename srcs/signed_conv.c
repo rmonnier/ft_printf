@@ -20,7 +20,7 @@ static long long get_arg(va_list ap, char id, t_length length)
 
 	if (length.l >= 2)
 		output = (long long)va_arg(ap, long long);
-	else if (length.l == 1 || id == 'U' || id == 'O' || id == 'B')
+	else if (length.l == 1 || id == 'D')
 		output = (long long)va_arg(ap, long);
 	else if (length.h >= 2)
 		output = (long long)(char)va_arg(ap, int);

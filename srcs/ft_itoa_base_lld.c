@@ -12,6 +12,14 @@
 
 #include "ft_printf.h"
 
+static char		convert_number_to_base_component(int number)
+{
+	char *base;
+
+	base = "0123456789abcdef";
+	return (base[number]);
+}
+
 static size_t	size_itoa(long long value, int base)
 {
 	size_t		i;
@@ -23,14 +31,6 @@ static size_t	size_itoa(long long value, int base)
 		i++;
 	}
 	return (i);
-}
-
-static char		convert_number_to_base_component(int number)
-{
-	char *base;
-
-	base = "0123456789abcdef";
-	return (base[number]);
 }
 
 static void		fill_str_itoa_base(long long value, int base, char *str, size_t i)

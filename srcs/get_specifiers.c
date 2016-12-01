@@ -56,14 +56,14 @@ void		get_precision(char const **format, t_specifiers *specifiers, va_list ap)
 	(*format)++;
 	if (ft_isdigit(**format))
 	{
-		specifiers->width = ft_atoi(++(*format));
+		specifiers->precision = ft_atoi(*format);
 		while (ft_isdigit(**format))
 			(*format)++;
 	}
 	else if (**format == '*')
 	{
 		(*format)++;
-		specifiers->width = va_arg(ap, int);
+		specifiers->precision = va_arg(ap, int);
 		while (ft_isdigit(**format))
 			(*format)++;
 		if (**format == '$')
@@ -96,7 +96,7 @@ void		get_identifier(char const **format, t_specifiers *specifiers)
 		specifiers->length.l = 1;
 		(*format)++;
 	}
-	else if (is_identifier(**format))
+	else
 	{
 		specifiers->identifier = **format;
 		(*format)++;

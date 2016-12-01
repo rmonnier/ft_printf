@@ -12,35 +12,72 @@
 
 #include "ft_printf.h"
 
-static t_bool is_sharp_eligible(char c)
-{
-	return (c == 'o' || c == 'O' || c == 'x' || c == 'X');
-}
-
-void apply_sharp_flag(char **data, t_specifiers specifiers)
+void apply_sharp_flag(char **data, char id)
 {
 	char *tmp;
 
-	tmp = *data;
-	if (specifiers.identifier == 'o' || specifiers.identifier == 'O')
-		*data = ft_strjoin("0", *data);
-	else
-		*data = ft_strjoin("0x", *data);
-	free(tmp);
+	if (id == 'o' || id == 'O' || id == 'x' || id == 'X')
+	{
+		tmp = *data;
+		if (id == 'o' || id == 'O')
+			*data = ft_strjoin("0", *data);
+		else
+			*data = ft_strjoin("0x", *data);
+		free(tmp);
+	}
 }
 
 void apply_plus_space_flag(char **data, t_specifiers specifiers)
 {
 	char *tmp;
 
-	tmp = *data;
-	if (**data != '-')
+	if (is_signed_conv(specifiers.identifier) && **data != '-')
 	{
+		tmp = *data;
 		if (specifiers.flags.plus)
 			*data = ft_strjoin("+", *data);
 		else
 			*data = ft_strjoin(" ", *data);
 		free(tmp);
+	}
+}
+
+void apply_precision(char **data, t_specifiers specifiers)
+{
+	size_t	len;
+	int		precision;
+	char		*to_add;
+	char		*tmp;
+
+	len = ft_strlen(*data);
+	precision = specifiers.precision;
+	tmp = *data;
+	if ((is_signed_conv(specifiers.identifier) ||
+		is_unsigned_conv(specifiers.identifier)) && precision > len)
+		{
+			to_add = ft_strcnew(precision - len, '0');
+			*data = ft_strjoin(to_add, *data);
+			free(tmp);
+			free(to_add);
+		}
+}
+
+void apply_width(char **data, t_specifiers specifiers)
+{
+	size_t	len;
+	int		width;
+	char		*to_add;
+	char		*tmp;
+
+	len = ft_strlen(*data);
+	width = specifiers.width;
+	if (width > len)
+	{
+		tmp = *data;
+		to_add = ft_strcnew(width - len, ' ');
+		*data = ft_strjoin(to_add, *data);
+		free(tmp);
+		free(to_add);
 	}
 }
 
@@ -51,12 +88,15 @@ void	process_data(char **data, t_specifiers specifiers)
 {
 	int	len;
 
-	if (specifiers.flags.sharp && is_sharp_eligible(specifiers.identifier))
-		apply_sharp_flag(data, specifiers);
+	//printf("precision : %d\n", specifiers.precision);
+	if (specifiers.flags.sharp)
+		apply_sharp_flag(data, specifiers.identifier);
 	if (specifiers.identifier == 'X')
 		ft_strupcase(*data);
-	if ((specifiers.flags.space || specifiers.flags.plus) &&
-			is_signed_conv(specifiers.identifier))
+	if (specifiers.precision > 0)
+		apply_precision(data, specifiers);
+	if ((specifiers.flags.space || specifiers.flags.plus))
 		apply_plus_space_flag(data, specifiers);
-	len = ft_strlen(*data);
+	if (specifiers.width > 0)
+		apply_width(data, specifiers);
 }

@@ -16,7 +16,9 @@
 # include "libft.h"
 # include <stdlib.h>
 # include <stdarg.h>
+
 # include <stdio.h>
+# include <unistd.h>
 
 typedef struct		s_flags
 {
@@ -66,6 +68,7 @@ t_bool		is_flag(const char c);
 t_bool		is_length_specifier(char const c);
 t_bool		is_identifier(char const c);
 t_bool	is_signed_conv(char c);
+t_bool	is_unsigned_conv(char c);
 int			get_conv_base(char id);
 void		initialize_specifiers(t_specifiers *specifiers);
 

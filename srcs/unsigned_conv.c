@@ -20,7 +20,7 @@ static unsigned long long get_arg(va_list ap, char id, t_length length)
 
 	if (length.l >= 2)
 		output = (unsigned long long)va_arg(ap, unsigned long long);
-	else if (length.l == 1 || id == 'U' || id == 'O' || id == 'B')
+	else if (length.l == 1 || id == 'X' || id == 'U' || id == 'O' || id == 'B')
 		output = (unsigned long long)va_arg(ap, unsigned long);
 	else if (length.h >= 2)
 		output = (unsigned long long)(unsigned char)va_arg(ap, unsigned int);
