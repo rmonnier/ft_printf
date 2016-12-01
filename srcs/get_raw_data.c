@@ -25,6 +25,11 @@ t_bool	is_signed_conv(char c)
 	return (c == 'd' || c == 'D' || c == 'i');
 }
 
+t_bool	is_characters_conv(char c)
+{
+	return (c == 'c' || c == 'C' || c == 's' || c == 'S');
+}
+
 char				*get_raw_data(va_list ap, t_specifiers specifiers, int n)
 {
 	char *str;
@@ -33,6 +38,8 @@ char				*get_raw_data(va_list ap, t_specifiers specifiers, int n)
 		str = unsigned_conv(ap, specifiers);
 	else if (is_signed_conv(specifiers.identifier))
 		str = signed_conv(ap, specifiers);
+	else if (is_characters_conv(specifiers.identifier))
+		str = characters_conv(ap, specifiers);
 	else if (specifiers.identifier == 'n')
 	{
 		str = ft_strdup("");

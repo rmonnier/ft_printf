@@ -16,6 +16,7 @@
 # include "libft.h"
 # include <stdlib.h>
 # include <stdarg.h>
+# include <wchar.h>
 
 # include <stdio.h>
 # include <unistd.h>
@@ -63,6 +64,10 @@ char  		*signed_conv(va_list ap, t_specifiers specifiers);
 
 char		*ft_itoa_base_lld(long long value, int base);
 char		*ft_itoa_base_llu(unsigned long long value, int base);
+
+char  	*characters_conv(va_list ap, t_specifiers specifiers);
+char *ft_unicode_encoder(wchar_t unicode);
+char *ft_unicode_string_encoder(wchar_t *unicode_str);
 
 t_bool		is_flag(const char c);
 t_bool		is_length_specifier(char const c);
