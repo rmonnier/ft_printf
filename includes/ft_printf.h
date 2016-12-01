@@ -49,7 +49,7 @@ typedef struct 		s_specifiers
 int			ft_printf(const char *format, ...);
 void		get_format_specifications(char const **format, va_list ap,
 												t_specifiers *specifiers);
-char		*get_raw_data(va_list ap, t_specifiers specifiers);
+char		*get_raw_data(va_list ap, t_specifiers specifiers, int n);
 void	process_data(char **data, t_specifiers specifiers);
 
 void		get_flags(const char **format, t_specifiers *specifiers);

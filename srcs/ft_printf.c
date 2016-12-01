@@ -14,14 +14,14 @@
 
 /* main part of the string formatting function */
 
-static char		*get_formated_string(const char **format, va_list ap)
+static char		*get_formated_string(const char **format, va_list ap, int n)
 {
 	t_specifiers	specifiers;
 	char				*str;
 
 	initialize_specifiers(&specifiers);
 	get_format_specifications(format, ap, &specifiers);
-	str = get_raw_data(ap, specifiers);
+	str = get_raw_data(ap, specifiers, n);
 	process_data(&str, specifiers);
 	return (str);
 }
@@ -43,14 +43,10 @@ int				ft_printf(const char *format, ...)
 			ft_putchar(*format++);
 			n++;
 		}
-		else if (*(++format) == 'n')
-		{
-			*(va_arg(ap, int*)) = n;
-			format++;
-		}
 		else
 		{
-			s = get_formated_string(&format, ap);
+			format++;
+			s = get_formated_string(&format, ap, n);
 			ft_putstr(s);
 			n = n + ft_strlen(s);
 			free(s);

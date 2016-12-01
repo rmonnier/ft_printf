@@ -94,7 +94,8 @@ void	process_data(char **data, t_specifiers specifiers)
 {
 	int	len;
 
-	//printf("precision : %d\n", specifiers.precision);
+	if (specifiers.identifier == 'n')
+		return ;
 	if (specifiers.flags.sharp)
 		apply_sharp_flag(data, specifiers.identifier);
 	if (specifiers.identifier == 'X')
