@@ -1,4 +1,4 @@
 # ft_printf
 
-//Flags handled       ; #, 0, -, ' ', +
+Flags handled       ; #, 0, -, ' ', +\n
 Identifiers handled : d, D, i, u, U, x, X, o, O, b, B, %, n
