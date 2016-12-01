@@ -74,8 +74,14 @@ void apply_width(char **data, t_specifiers specifiers)
 	if (width > len)
 	{
 		tmp = *data;
-		to_add = ft_strcnew(width - len, ' ');
-		*data = ft_strjoin(to_add, *data);
+		if (specifiers.flags.zero == 0 || specifiers.precision != 0)
+			to_add = ft_strcnew(width - len, ' ');
+		else
+			to_add = ft_strcnew(width - len, '0');
+		if (specifiers.flags.dash == 0)
+			*data = ft_strjoin(to_add, *data);
+		else
+			*data = ft_strjoin(*data, to_add);
 		free(tmp);
 		free(to_add);
 	}
