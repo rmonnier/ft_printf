@@ -10,7 +10,18 @@
 #                                                                              #
 # **************************************************************************** #
 
-SRCS_NAME		=		ft_printf.c
+SRCS_NAME		=		ft_printf.c\
+							characters_conv.c\
+							format_specifications_parser.c\
+							ft_itoa_base_lld.c\
+							ft_itoa_base_llu.c\
+							ft_unicode_encoder.c\
+							get_raw_data.c\
+							get_specifiers.c\
+							process_data.c\
+							signed_conv.c\
+							unsigned_conv.c\
+							tools.c
 SRCS_PATH		=		srcs/
 SRCS			=		$(addprefix $(SRCS_PATH), $(SRCS_NAME))
 OBJ_NAME		=		$(SRCS_NAME:.c=.o)
