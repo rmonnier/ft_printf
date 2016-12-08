@@ -35,9 +35,13 @@ static int		size_itoa(intmax_t value, int base)
 
 static void		fill_str_itoa_base(intmax_t value, int base, char *str, int i)
 {
+	while ((value / base) != 0)
+	{
+		str[i] = convert_number_to_base_component(-(value % base));
+		i--;
+		value = value / base;
+	}
 	str[i] = convert_number_to_base_component(-(value % base));
-	if ((value / base) != 0)
-		fill_str_itoa_base(value / base, base, str, i - 1);
 }
 
 char			*ft_itoa_base_lld(intmax_t value, int base)

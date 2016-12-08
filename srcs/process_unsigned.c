@@ -19,8 +19,7 @@ static void	apply_zero_cases(char **data, int *size, t_specifiers *specifiers)
 		**data = '\0';
 		*size = 0;
 	}
-	if (specifiers->identifier != 'p' && specifiers->identifier != 'o' &&
-			specifiers->identifier != 'O')
+	if (specifiers->identifier == 'x' || specifiers->identifier == 'X')
 		specifiers->flags.sharp = 0;
 }
 
