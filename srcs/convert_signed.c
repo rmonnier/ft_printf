@@ -1,44 +1,51 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   unsigned_conv.c                                    :+:      :+:    :+:   */
+/*   convert_signed.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rmonnier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/11/29 22:52:07 by rmonnier          #+#    #+#             */
-/*   Updated: 2016/11/29 23:16:38 by rmonnier         ###   ########.fr       */
+/*   Created: 2016/12/08 16:05:36 by rmonnier          #+#    #+#             */
+/*   Updated: 2016/12/08 16:05:39 by rmonnier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-/* data conversion for d, D, i */
+/*
+** data conversion for d, D, i
+*/
 
-static long long get_arg(va_list ap, char id, t_length length)
+static intmax_t	get_arg(va_list ap, char id, t_length length)
 {
-	unsigned long long output;
+	intmax_t output;
 
 	if (length.l >= 2)
-		output = (long long)va_arg(ap, long long);
+		output = (intmax_t)va_arg(ap, long long);
 	else if (length.l == 1 || id == 'D')
-		output = (long long)va_arg(ap, long);
+		output = (intmax_t)va_arg(ap, long);
+	else if (length.j >= 1)
+		output = (intmax_t)va_arg(ap, intmax_t);
+	else if (length.z >= 1)
+		output = (intmax_t)va_arg(ap, long long);
 	else if (length.h >= 2)
-		output = (long long)(char)va_arg(ap, int);
+		output = (intmax_t)(char)va_arg(ap, int);
 	else if (length.h == 1)
-		output = (long long)(short)va_arg(ap, int);
+		output = (intmax_t)(short)va_arg(ap, int);
 	else
-		output = (long long)va_arg(ap, int);
+		output = (intmax_t)va_arg(ap, int);
 	return (output);
 }
 
-char  				*signed_conv(va_list ap, t_specifiers specifiers)
+char			*signed_conv(va_list ap, t_specifiers specifiers, int *size)
 {
-	long long	arg;
+	intmax_t	arg;
 	int			base;
-	char			*output;
+	char		*s;
 
 	arg = get_arg(ap, specifiers.identifier, specifiers.length);
 	base = get_conv_base(specifiers.identifier);
-	output = ft_itoa_base_lld(arg, base);
-	return (output);
+	s = ft_itoa_base_lld(arg, base);
+	*size = ft_strlen(s);
+	return (s);
 }

@@ -6,22 +6,27 @@
 #    By: rmonnier <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/11/03 10:17:46 by rmonnier          #+#    #+#              #
-#    Updated: 2016/11/25 13:43:26 by rmonnier         ###   ########.fr        #
+#    Updated: 2016/12/07 16:32:11 by rmonnier         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 SRCS_NAME		=		ft_printf.c\
-							characters_conv.c\
+							convert_characters.c\
+							convert_signed.c\
+							convert_unsigned.c\
 							format_specifications_parser.c\
 							ft_itoa_base_lld.c\
 							ft_itoa_base_llu.c\
 							ft_unicode_encoder.c\
+							ft_unicode_encoder_string.c\
 							get_raw_data.c\
 							get_specifiers.c\
 							process_data.c\
-							signed_conv.c\
-							unsigned_conv.c\
-							tools.c
+							process_characters.c\
+							process_signed.c\
+							process_unsigned.c\
+							tools.c\
+							tools2.c
 SRCS_PATH		=		srcs/
 SRCS			=		$(addprefix $(SRCS_PATH), $(SRCS_NAME))
 OBJ_NAME		=		$(SRCS_NAME:.c=.o)

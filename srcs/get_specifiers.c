@@ -6,15 +6,17 @@
 /*   By: rmonnier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/28 21:51:41 by rmonnier          #+#    #+#             */
-/*   Updated: 2016/11/29 17:06:15 by rmonnier         ###   ########.fr       */
+/*   Updated: 2016/12/08 16:22:53 by rmonnier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-/* functions that get each kind of specifications through parsing */
+/*
+** functions that get each kind of specifications through parsing
+*/
 
-void		get_flags(char const **format, t_specifiers *specifiers)
+void	get_flags(char const **format, t_specifiers *specifiers)
 {
 	while (is_flag(**format))
 	{
@@ -32,7 +34,7 @@ void		get_flags(char const **format, t_specifiers *specifiers)
 	}
 }
 
-void		get_width(char const **format, t_specifiers *specifiers, va_list ap)
+void	get_width(char const **format, t_specifiers *specifiers, va_list ap)
 {
 	if (ft_isdigit(**format))
 	{
@@ -44,14 +46,15 @@ void		get_width(char const **format, t_specifiers *specifiers, va_list ap)
 	{
 		(*format)++;
 		specifiers->width = va_arg(ap, int);
-		while (ft_isdigit(**format))
-			(*format)++;
-		if (**format == '$')
-			(*format)++;
+		if (specifiers->width < 0)
+		{
+			specifiers->width *= -1;
+			specifiers->flags.dash = 1;
+		}
 	}
 }
 
-void		get_precision(char const **format, t_specifiers *specifiers, va_list ap)
+void	get_precision(char const **format, t_specifiers *specifiers, va_list ap)
 {
 	(*format)++;
 	if (ft_isdigit(**format))
@@ -64,14 +67,12 @@ void		get_precision(char const **format, t_specifiers *specifiers, va_list ap)
 	{
 		(*format)++;
 		specifiers->precision = va_arg(ap, int);
-		while (ft_isdigit(**format))
-			(*format)++;
-		if (**format == '$')
-			(*format)++;
 	}
+	else
+		specifiers->precision = 0;
 }
 
-void get_length_specifier(char const **format, t_specifiers *specifiers)
+void	get_length_specifier(char const **format, t_specifiers *specifiers)
 {
 	while (is_length_specifier(**format))
 	{
@@ -87,18 +88,13 @@ void get_length_specifier(char const **format, t_specifiers *specifiers)
 	}
 }
 
-void		get_identifier(char const **format, t_specifiers *specifiers)
+void	get_identifier(char const **format, t_specifiers *specifiers)
 {
 	if (**format == 'p')
 	{
-		specifiers->identifier = 'x';
 		specifiers->flags.sharp = 1;
 		specifiers->length.l = 1;
-		(*format)++;
 	}
-	else
-	{
-		specifiers->identifier = **format;
-		(*format)++;
-	}
+	specifiers->identifier = **format;
+	(*format)++;
 }

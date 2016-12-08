@@ -1,26 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_itoa_base_lld.c                                 :+:      :+:    :+:   */
+/*   ft_itoa_base.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rmonnier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/12/08 16:08:23 by rmonnier          #+#    #+#             */
-/*   Updated: 2016/12/08 16:20:23 by rmonnier         ###   ########.fr       */
+/*   Created: 2016/11/28 11:22:54 by rmonnier          #+#    #+#             */
+/*   Updated: 2016/11/28 16:07:24 by rmonnier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "libft.h"
+#include <stdlib.h>
 
-static char		convert_number_to_base_component(int number)
-{
-	char	*base;
-
-	base = "0123456789abcdef";
-	return (base[number]);
-}
-
-static int		size_itoa(intmax_t value, int base)
+static int		size_itoa(int value, int base)
 {
 	int		i;
 
@@ -33,14 +26,22 @@ static int		size_itoa(intmax_t value, int base)
 	return (i);
 }
 
-static void		fill_str_itoa_base(intmax_t value, int base, char *str, int i)
+static char		convert_number_to_base_component(int number)
+{
+	char *base;
+
+	base = "0123456789abcdef";
+	return (base[number]);
+}
+
+static void		fill_str_itoa_base(int value, int base, char *str, int i)
 {
 	str[i] = convert_number_to_base_component(-(value % base));
 	if ((value / base) != 0)
 		fill_str_itoa_base(value / base, base, str, i - 1);
 }
 
-char			*ft_itoa_base_lld(intmax_t value, int base)
+char			*ft_itoa_base(int value, int base)
 {
 	char	*itoa;
 	int		size;

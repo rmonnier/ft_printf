@@ -6,32 +6,38 @@
 /*   By: rmonnier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/25 11:56:58 by rmonnier          #+#    #+#             */
-/*   Updated: 2016/11/29 17:33:04 by rmonnier         ###   ########.fr       */
+/*   Updated: 2016/12/08 16:11:51 by rmonnier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-/* main part of the string formatting function */
+/*
+** main part of the string formatting function
+*/
 
-static char		*get_formated_string(const char **format, va_list ap, int n)
+static char	*get_formated_string(const char **format, va_list ap,
+									int *size, int n)
 {
 	t_specifiers	specifiers;
-	char				*str;
+	char			*s;
 
 	initialize_specifiers(&specifiers);
 	get_format_specifications(format, ap, &specifiers);
-	str = get_raw_data(ap, specifiers, n);
-	process_data(&str, specifiers);
-	return (str);
+	s = get_raw_data(ap, specifiers, size, n);
+	process_data(&s, size, specifiers);
+	return (s);
 }
 
-/* main part of the function */
+/*
+** main part of the function
+*/
 
-int				ft_printf(const char *format, ...)
+int			ft_printf(const char *format, ...)
 {
 	va_list	ap;
-	char		*s;
+	char	*s;
+	int		size;
 	int		n;
 
 	n = 0;
@@ -46,9 +52,9 @@ int				ft_printf(const char *format, ...)
 		else
 		{
 			format++;
-			s = get_formated_string(&format, ap, n);
-			ft_putstr(s);
-			n = n + ft_strlen(s);
+			s = get_formated_string(&format, ap, &size, n);
+			write(1, s, size);
+			n = n + size;
 			free(s);
 		}
 	}

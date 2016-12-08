@@ -6,34 +6,15 @@
 /*   By: rmonnier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/01 16:29:51 by rmonnier          #+#    #+#             */
-/*   Updated: 2016/12/01 18:39:33 by rmonnier         ###   ########.fr       */
+/*   Updated: 2016/12/08 16:15:21 by rmonnier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-char *ft_unicode_string_encoder(wchar_t *unicode_str)
+char	*ft_unicode_encoder(wint_t unicode)
 {
-	char		*encoding;
-	char		*to_add;
-	char		*tmp;
-
-	encoding = ft_strdup("");
-	while (*unicode_str)
-	{
-		to_add = ft_unicode_encoder((wint_t)(*unicode_str));
-		tmp = encoding;
-		encoding = ft_strjoin(encoding, to_add);
-		free(to_add);
-		free(tmp);
-		unicode_str++;
-	}
-	return (encoding);
-}
-
-char *ft_unicode_encoder(wint_t unicode)
-{
-	char *encoding;
+	char	*encoding;
 
 	encoding = (char*)ft_strnew(5);
 	if (unicode <= 127)

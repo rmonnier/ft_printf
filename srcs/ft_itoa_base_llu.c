@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_itoa_base.c                                     :+:      :+:    :+:   */
+/*   ft_itoa_base_llu.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rmonnier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/11/28 11:22:54 by rmonnier          #+#    #+#             */
-/*   Updated: 2016/11/29 23:19:27 by rmonnier         ###   ########.fr       */
+/*   Created: 2016/12/08 16:09:32 by rmonnier          #+#    #+#             */
+/*   Updated: 2016/12/08 16:20:14 by rmonnier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,9 @@ static char		convert_number_to_base_component(int number)
 	return (base[number]);
 }
 
-static size_t	size_itoa(unsigned long long value, int base)
+static int		size_itoa(uintmax_t value, int base)
 {
-	size_t		i;
+	int		i;
 
 	i = 1;
 	while ((value / base) != 0)
@@ -33,17 +33,17 @@ static size_t	size_itoa(unsigned long long value, int base)
 	return (i);
 }
 
-static void		fill_str_itoa_base(unsigned long long value, int base, char *str, size_t i)
+static void		fill_str_itoa_base(uintmax_t value, int base, char *str, int i)
 {
 	str[i] = convert_number_to_base_component(value % base);
 	if ((value / base) != 0)
 		fill_str_itoa_base(value / base, base, str, i - 1);
 }
 
-char			*ft_itoa_base_llu(unsigned long long value, int base)
+char			*ft_itoa_base_llu(uintmax_t value, int base)
 {
 	char	*itoa;
-	size_t	size;
+	int		size;
 
 	if (base < 2 || base > 16)
 		return (NULL);

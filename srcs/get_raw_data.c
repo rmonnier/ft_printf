@@ -6,46 +6,51 @@
 /*   By: rmonnier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/30 16:20:44 by rmonnier          #+#    #+#             */
-/*   Updated: 2016/11/30 16:20:46 by rmonnier         ###   ########.fr       */
+/*   Updated: 2016/12/08 16:20:01 by rmonnier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-/* function that select a method to get the data */
-
-t_bool	is_unsigned_conv(char c)
+static char	*n_conv(va_list ap, t_length length, int *size, int n)
 {
-	return (c == 'u' || c == 'U' || c == 'o' || c == 'O' || c == 'x' || c == 'X' ||
-			c == 'b' || c == 'B');
+	char	*s;
+
+	if (length.l >= 2)
+		*(va_arg(ap, long long*)) = (long long)n;
+	else if (length.l == 1)
+		*(va_arg(ap, long*)) = (long)n;
+	else if (length.j >= 1)
+		*(va_arg(ap, intmax_t*)) = (intmax_t)n;
+	else if (length.z >= 1)
+		*(va_arg(ap, size_t*)) = (size_t)n;
+	else if (length.h >= 2)
+		*(va_arg(ap, char*)) = (char)n;
+	else if (length.h == 1)
+		*(va_arg(ap, short*)) = (short)n;
+	else
+		*(va_arg(ap, int*)) = n;
+	s = ft_strdup("");
+	*size = 0;
+	return (s);
 }
 
-t_bool	is_signed_conv(char c)
+char		*get_raw_data(va_list ap, t_specifiers specifiers, int *size, int n)
 {
-	return (c == 'd' || c == 'D' || c == 'i');
-}
-
-t_bool	is_characters_conv(char c)
-{
-	return (c == 'c' || c == 'C' || c == 's' || c == 'S');
-}
-
-char				*get_raw_data(va_list ap, t_specifiers specifiers, int n)
-{
-	char *str;
+	char	*s;
 
 	if (is_unsigned_conv(specifiers.identifier))
-		str = unsigned_conv(ap, specifiers);
+		s = unsigned_conv(ap, specifiers, size);
 	else if (is_signed_conv(specifiers.identifier))
-		str = signed_conv(ap, specifiers);
+		s = signed_conv(ap, specifiers, size);
 	else if (is_characters_conv(specifiers.identifier))
-		str = characters_conv(ap, specifiers);
+		s = characters_conv(ap, specifiers, size);
 	else if (specifiers.identifier == 'n')
-	{
-		str = ft_strdup("");
-		*(va_arg(ap, int*)) = n;
-	}
+		s = n_conv(ap, specifiers.length, size, n);
 	else
-		str = ft_strndup(&(specifiers.identifier), 1);
-	return (str);
+	{
+		s = ft_strndup(&(specifiers.identifier), 1);
+		*size = ft_strlen(s);
+	}
+	return (s);
 }
