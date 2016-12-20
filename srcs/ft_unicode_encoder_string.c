@@ -21,7 +21,8 @@ char	*ft_unicode_encoder_string(wchar_t *unicode_str)
 	encoding = ft_strdup("");
 	while (*unicode_str)
 	{
-		to_add = ft_unicode_encoder((wint_t)(*unicode_str));
+		if ((to_add = ft_unicode_encoder((wint_t)(*unicode_str))) == NULL)
+			return (NULL);
 		tmp = encoding;
 		encoding = ft_strjoin(encoding, to_add);
 		free(to_add);

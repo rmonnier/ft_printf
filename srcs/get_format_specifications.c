@@ -12,23 +12,23 @@
 
 #include "ft_printf.h"
 
-void	get_format_specifications(char const **format, va_list ap,
+void	ftpf_get_format_specifications(char const **format, va_list ap,
 											t_specifiers *specifiers)
 {
-	while (is_flag(**format) || ft_isdigit(**format) || **format == '*' ||
-		**format == '.' || is_length_specifier(**format))
+	while (ftpf_is_flag(**format) || ft_isdigit(**format) || **format == '*' ||
+		**format == '.' || ftpf_is_length_specifier(**format))
 	{
-		if (is_flag(**format))
-			get_flags(format, specifiers);
+		if (ftpf_is_flag(**format))
+			ftpf_get_flags(format, specifiers);
 		else if (ft_isdigit(**format) || **format == '*')
-			get_width(format, specifiers, ap);
+			ftpf_get_width(format, specifiers, ap);
 		else if (**format == '.')
-			get_precision(format, specifiers, ap);
-		else if (is_length_specifier(**format))
-			get_length_specifier(format, specifiers);
+			ftpf_get_precision(format, specifiers, ap);
+		else if (ftpf_is_length_specifier(**format))
+			ftpf_get_length_specifier(format, specifiers);
 	}
 	if (**format)
-		get_identifier(format, specifiers);
+		ftpf_get_identifier(format, specifiers);
 	else
 		specifiers->identifier = '\0';
 }

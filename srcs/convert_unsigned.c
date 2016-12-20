@@ -24,10 +24,10 @@ static uintmax_t	get_arg(va_list ap, char id, t_length length)
 		output = (uintmax_t)va_arg(ap, unsigned long long);
 	else if (length.l == 1 || id == 'U' || id == 'O' || id == 'B')
 		output = (uintmax_t)va_arg(ap, unsigned long);
-	else if (length.j >= 1)
-		output = va_arg(ap, uintmax_t);
 	else if (length.z >= 1)
 		output = (uintmax_t)va_arg(ap, size_t);
+	else if (length.j >= 1)
+		output = va_arg(ap, uintmax_t);
 	else if (length.h >= 2)
 		output = (uintmax_t)(unsigned char)va_arg(ap, unsigned int);
 	else if (length.h == 1)
@@ -37,7 +37,7 @@ static uintmax_t	get_arg(va_list ap, char id, t_length length)
 	return (output);
 }
 
-char				*unsigned_conv(va_list ap, t_specifiers specifiers,
+char				*ftpf_convert_unsigned(va_list ap, t_specifiers specifiers,
 									int *size)
 {
 	uintmax_t	arg;
@@ -45,7 +45,7 @@ char				*unsigned_conv(va_list ap, t_specifiers specifiers,
 	char		*s;
 
 	arg = get_arg(ap, specifiers.identifier, specifiers.length);
-	base = get_conv_base(specifiers.identifier);
+	base = ftpf_get_conv_base(specifiers.identifier);
 	s = ft_itoa_base_llu(arg, base);
 	*size = ft_strlen(s);
 	return (s);

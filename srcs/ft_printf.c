@@ -22,10 +22,11 @@ static char	*get_formated_string(const char **format, va_list ap,
 	t_specifiers	specifiers;
 	char			*s;
 
-	initialize_specifiers(&specifiers);
-	get_format_specifications(format, ap, &specifiers);
-	s = get_raw_data(ap, specifiers, size, n);
-	process_data(&s, size, specifiers);
+	ftpf_initialize_specifiers(&specifiers);
+	ftpf_get_format_specifications(format, ap, &specifiers);
+	s = ftpf_get_raw_data(ap, specifiers, size, n);
+	if (s != NULL)
+		ftpf_process_data(&s, size, specifiers);
 	return (s);
 }
 
@@ -45,18 +46,17 @@ int			ft_printf(const char *format, ...)
 	while (*format)
 	{
 		if (*format != '%')
-		{
 			ft_putchar(*format++);
-			n++;
-		}
 		else
 		{
 			format++;
-			s = get_formated_string(&format, ap, &size, n);
+			if ((s = get_formated_string(&format, ap, &size, n)) == NULL)
+				return (-1);
 			write(1, s, size);
-			n = n + size;
+			n = n + size - 1;
 			free(s);
 		}
+		n++;
 	}
 	va_end(ap);
 	return (n);

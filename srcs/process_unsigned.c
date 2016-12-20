@@ -6,7 +6,7 @@
 /*   By: rmonnier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/29 22:52:07 by rmonnier          #+#    #+#             */
-/*   Updated: 2016/12/08 16:27:52 by rmonnier         ###   ########.fr       */
+/*   Updated: 2016/12/20 12:46:23 by rmonnier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,15 @@
 
 static void	apply_zero_cases(char **data, int *size, t_specifiers *specifiers)
 {
+	int	i;
+
+	i = 0;
+	while ((*data)[i])
+	{
+		if (ft_isdigit((*data)[i]) == 0)
+			return ;
+		i++;
+	}
 	if (specifiers->precision == 0)
 	{
 		**data = '\0';
@@ -90,7 +99,8 @@ static void	apply_width_nodash(char **data, int *size, t_specifiers specifiers)
 	free(to_add);
 }
 
-void		process_unsigned(char **data, int *size, t_specifiers specifiers)
+void		ftpf_process_unsigned(char **data, int *size,
+									t_specifiers specifiers)
 {
 	if (specifiers.precision > *size)
 		apply_precision(data, size, specifiers);
@@ -101,7 +111,7 @@ void		process_unsigned(char **data, int *size, t_specifiers specifiers)
 	if (specifiers.width > *size && specifiers.flags.dash == 0)
 		apply_width_nodash(data, size, specifiers);
 	if (specifiers.width > *size && specifiers.flags.dash == 1)
-		apply_width_dash(data, size, specifiers.width);
+		ftpf_apply_width_dash(data, size, specifiers.width);
 	if (specifiers.identifier == 'X')
 		ft_strupcase(*data);
 }

@@ -6,7 +6,7 @@
 /*   By: rmonnier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/08 15:58:58 by rmonnier          #+#    #+#             */
-/*   Updated: 2016/12/08 16:04:17 by rmonnier         ###   ########.fr       */
+/*   Updated: 2016/12/20 12:44:29 by rmonnier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,8 @@ static char	*get_arg_lc(va_list ap, int *size)
 	char	*output;
 
 	arg = (wint_t)va_arg(ap, wint_t);
-	output = ft_unicode_encoder(arg);
+	if ((output = ft_unicode_encoder(arg)) == NULL)
+		return (NULL);
 	if ((*size = ft_strlen(output)) == 0)
 		*size = 1;
 	return (output);
@@ -60,14 +61,18 @@ static char	*get_arg_ls(va_list ap, int *size)
 
 	arg = (wchar_t*)va_arg(ap, wchar_t*);
 	if (arg != NULL)
-		output = ft_unicode_encoder_string(arg);
+	{
+		if ((output = ft_unicode_encoder_string(arg)) == NULL)
+			return (NULL);
+	}
 	else
 		output = ft_unicode_encoder_string(L"(null)");
 	*size = ft_strlen(output);
 	return (output);
 }
 
-char		*characters_conv(va_list ap, t_specifiers specifiers, int *size)
+char		*ftpf_convert_characters(va_list ap, t_specifiers specifiers,
+									int *size)
 {
 	char	*s;
 

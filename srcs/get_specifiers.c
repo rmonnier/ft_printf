@@ -6,7 +6,7 @@
 /*   By: rmonnier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/28 21:51:41 by rmonnier          #+#    #+#             */
-/*   Updated: 2016/12/08 16:22:53 by rmonnier         ###   ########.fr       */
+/*   Updated: 2016/12/20 12:45:42 by rmonnier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,9 @@
 ** functions that get each kind of specifications through parsing
 */
 
-void	get_flags(char const **format, t_specifiers *specifiers)
+void	ftpf_get_flags(char const **format, t_specifiers *specifiers)
 {
-	while (is_flag(**format))
+	while (ftpf_is_flag(**format))
 	{
 		if (**format == '#')
 			specifiers->flags.sharp = 1;
@@ -34,7 +34,8 @@ void	get_flags(char const **format, t_specifiers *specifiers)
 	}
 }
 
-void	get_width(char const **format, t_specifiers *specifiers, va_list ap)
+void	ftpf_get_width(char const **format, t_specifiers *specifiers,
+						va_list ap)
 {
 	if (ft_isdigit(**format))
 	{
@@ -54,7 +55,8 @@ void	get_width(char const **format, t_specifiers *specifiers, va_list ap)
 	}
 }
 
-void	get_precision(char const **format, t_specifiers *specifiers, va_list ap)
+void	ftpf_get_precision(char const **format, t_specifiers *specifiers,
+							va_list ap)
 {
 	(*format)++;
 	if (ft_isdigit(**format))
@@ -72,9 +74,9 @@ void	get_precision(char const **format, t_specifiers *specifiers, va_list ap)
 		specifiers->precision = 0;
 }
 
-void	get_length_specifier(char const **format, t_specifiers *specifiers)
+void	ftpf_get_length_specifier(char const **format, t_specifiers *specifiers)
 {
-	while (is_length_specifier(**format))
+	while (ftpf_is_length_specifier(**format))
 	{
 		if (**format == 'h')
 			specifiers->length.h++;
@@ -84,11 +86,13 @@ void	get_length_specifier(char const **format, t_specifiers *specifiers)
 			specifiers->length.j++;
 		else if (**format == 'z')
 			specifiers->length.z++;
+		else if (**format == 'L')
+			specifiers->length.f++;
 		(*format)++;
 	}
 }
 
-void	get_identifier(char const **format, t_specifiers *specifiers)
+void	ftpf_get_identifier(char const **format, t_specifiers *specifiers)
 {
 	if (**format == 'p')
 	{

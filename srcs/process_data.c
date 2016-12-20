@@ -6,7 +6,7 @@
 /*   By: rmonnier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/25 11:56:58 by rmonnier          #+#    #+#             */
-/*   Updated: 2016/12/08 16:21:43 by rmonnier         ###   ########.fr       */
+/*   Updated: 2016/12/15 19:07:59 by rmonnier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@ static void	apply_width(char **data, int *size, t_specifiers specifiers)
 			to_add = ft_strcnew(width - *size, ' ');
 		else
 			to_add = ft_strcnew(width - *size, '0');
+		if (to_add == NULL)
+			return ;
 		if (specifiers.flags.dash == 0)
 			*data = ft_strjoin(to_add, *data);
 		else
@@ -41,16 +43,18 @@ static void	apply_width(char **data, int *size, t_specifiers specifiers)
 ** specified
 */
 
-void		process_data(char **data, int *size, t_specifiers specifiers)
+void		ftpf_process_data(char **data, int *size, t_specifiers specifiers)
 {
 	if (specifiers.identifier == 'n')
 		return ;
-	else if (is_unsigned_conv(specifiers.identifier))
-		process_unsigned(data, size, specifiers);
-	else if (is_signed_conv(specifiers.identifier))
-		process_signed(data, size, specifiers);
-	else if (is_characters_conv(specifiers.identifier))
-		process_characters(data, size, specifiers);
+	else if (ftpf_is_unsigned_conv(specifiers.identifier))
+		ftpf_process_unsigned(data, size, specifiers);
+	else if (ftpf_is_signed_conv(specifiers.identifier))
+		ftpf_process_signed(data, size, specifiers);
+	else if (ftpf_is_characters_conv(specifiers.identifier))
+		ftpf_process_characters(data, size, specifiers);
+	else if (ftpf_is_float_conv(specifiers.identifier))
+		ftpf_process_float(data, size, specifiers);
 	else
 	{
 		if (specifiers.width > 0)

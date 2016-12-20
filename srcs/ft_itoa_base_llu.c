@@ -37,11 +37,11 @@ static void		fill_str_itoa_base(uintmax_t value, int base, char *str, int i)
 {
 	while ((value / base) != 0)
 	{
-		str[i] = convert_number_to_base_component(-(value % base));
+		str[i] = convert_number_to_base_component(value % base);
 		i--;
 		value = value / base;
 	}
-	str[i] = convert_number_to_base_component(-(value % base));
+	str[i] = convert_number_to_base_component(value % base);
 }
 
 char			*ft_itoa_base_llu(uintmax_t value, int base)

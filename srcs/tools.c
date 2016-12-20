@@ -16,26 +16,26 @@
 ** simple functions that identify usefull characters
 */
 
-t_bool	is_flag(char const c)
+t_bool	ftpf_is_flag(char const c)
 {
 	return (c == '#' || c == '0' || c == '-' || c == ' ' || c == '+');
 }
 
-t_bool	is_length_specifier(char const c)
+t_bool	ftpf_is_length_specifier(char const c)
 {
-	return (c == 'h' || c == 'l' || c == 'j' || c == 'z');
+	return (c == 'h' || c == 'l' || c == 'j' || c == 'z' || c == 'L');
 }
 
-t_bool	is_identifier(char const c)
+t_bool	ftpf_identifier(char const c)
 {
 	return (c == 'd' || c == 'D' || c == 'i' ||
 			c == 'u' || c == 'U' || c == 'o' || c == 'O' ||
 			c == 'x' || c == 'X' || c == 'b' || c == 'B' ||
 			c == 'c' || c == 'C' || c == 's' || c == 'S' ||
-			c == 'p' || c == '%');
+			c == 'f' || c == 'F' || c == 'p' || c == '%');
 }
 
-int		get_conv_base(char id)
+int		ftpf_get_conv_base(char id)
 {
 	if (id == 'x' || id == 'X' || id == 'p')
 		return (16);
@@ -50,7 +50,7 @@ int		get_conv_base(char id)
 	return (-1);
 }
 
-void	initialize_specifiers(t_specifiers *specifiers)
+void	ftpf_initialize_specifiers(t_specifiers *specifiers)
 {
 	specifiers->flags.sharp = 0;
 	specifiers->flags.zero = 0;
@@ -63,5 +63,6 @@ void	initialize_specifiers(t_specifiers *specifiers)
 	specifiers->length.l = 0;
 	specifiers->length.j = 0;
 	specifiers->length.z = 0;
+	specifiers->length.f = 0;
 	specifiers->identifier = 0;
 }

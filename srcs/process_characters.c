@@ -6,7 +6,7 @@
 /*   By: rmonnier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/01 18:39:04 by rmonnier          #+#    #+#             */
-/*   Updated: 2016/12/08 16:20:48 by rmonnier         ###   ########.fr       */
+/*   Updated: 2016/12/20 12:45:18 by rmonnier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,8 @@ static void	apply_width(char **data, int *size, t_specifiers specifiers)
 	}
 }
 
-void		process_characters(char **data, int *size, t_specifiers specifiers)
+void		ftpf_process_characters(char **data, int *size,
+									t_specifiers specifiers)
 {
 	if (specifiers.precision > -1 && specifiers.precision < *size)
 		apply_precision(data, size, specifiers);
