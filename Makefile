@@ -11,22 +11,22 @@
 # **************************************************************************** #
 
 SRCS_NAME		=		ft_printf.c\
-							convert_characters.c\
-							convert_signed.c\
-							convert_unsigned.c\
-							get_format_specifications.c\
+							ftpf_convert_characters.c\
+							ftpf_convert_signed.c\
+							ftpf_convert_unsigned.c\
+							ftpf_get_format_specifications.c\
 							ft_itoa_base_lld.c\
 							ft_itoa_base_llu.c\
 							ft_unicode_encoder.c\
 							ft_unicode_encoder_string.c\
-							get_raw_data.c\
-							get_specifiers.c\
-							process_characters.c\
-							process_data.c\
-							process_signed.c\
-							process_unsigned.c\
-							tools.c\
-							tools_is_functions.c
+							ftpf_get_raw_data.c\
+							ftpf_get_specifiers.c\
+							ftpf_process_characters.c\
+							ftpf_process_data.c\
+							ftpf_process_signed.c\
+							ftpf_process_unsigned.c\
+							ftpf_tools.c\
+							ftpf_is_functions.c
 SRCS_PATH		=		srcs/
 SRCS			=		$(addprefix $(SRCS_PATH), $(SRCS_NAME))
 OBJ_NAME		=		$(SRCS_NAME:.c=.o)
