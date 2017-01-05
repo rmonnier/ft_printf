@@ -32,8 +32,3 @@ t_bool	ftpf_is_characters_conv(char c)
 {
 	return (c == 'c' || c == 'C' || c == 's' || c == 'S');
 }
-
-t_bool	ftpf_is_float_conv(char c)
-{
-	return (c == 'f' || c == 'F');
-}

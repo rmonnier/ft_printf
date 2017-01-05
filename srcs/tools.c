@@ -23,7 +23,7 @@ t_bool	ftpf_is_flag(char const c)
 
 t_bool	ftpf_is_length_specifier(char const c)
 {
-	return (c == 'h' || c == 'l' || c == 'j' || c == 'z' || c == 'L');
+	return (c == 'h' || c == 'l' || c == 'j' || c == 'z');
 }
 
 t_bool	ftpf_identifier(char const c)
@@ -32,7 +32,7 @@ t_bool	ftpf_identifier(char const c)
 			c == 'u' || c == 'U' || c == 'o' || c == 'O' ||
 			c == 'x' || c == 'X' || c == 'b' || c == 'B' ||
 			c == 'c' || c == 'C' || c == 's' || c == 'S' ||
-			c == 'f' || c == 'F' || c == 'p' || c == '%');
+			c == 'p' || c == '%');
 }
 
 int		ftpf_get_conv_base(char id)
@@ -63,6 +63,5 @@ void	ftpf_initialize_specifiers(t_specifiers *specifiers)
 	specifiers->length.l = 0;
 	specifiers->length.j = 0;
 	specifiers->length.z = 0;
-	specifiers->length.f = 0;
 	specifiers->identifier = 0;
 }

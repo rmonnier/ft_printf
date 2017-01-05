@@ -34,7 +34,6 @@ typedef struct		s_length
 	int			h;
 	int			j;
 	int			z;
-	int			f;
 }					t_length;
 
 typedef struct		s_specifiers
@@ -67,8 +66,6 @@ char				*ftpf_convert_unsigned(va_list ap,
 									t_specifiers specifiers, int *size);
 char				*ftpf_convert_signed(va_list ap,
 									t_specifiers specifiers, int *size);
-char				*ftpf_convert_float(va_list ap, t_specifiers specifiers,
-									int *size);
 char				*ftpf_convert_characters(va_list ap,
 										t_specifiers specifiers, int *size);
 void				ftpf_apply_width_dash(char **data, int *size, int width);
@@ -78,11 +75,8 @@ void				ftpf_process_signed(char **data, int *size,
 									t_specifiers specifiers);
 void				ftpf_process_characters(char **data, int *size,
 									t_specifiers specifiers);
-void				ftpf_process_float(char **data, int *size,
-									t_specifiers specifiers);
 char				*ft_itoa_base_lld(intmax_t value, int base);
 char				*ft_itoa_base_llu(uintmax_t value, int base);
-char				*ft_ftoa(long double value, int precision);
 char				*ft_unicode_encoder(wchar_t unicode);
 char				*ft_unicode_encoder_string(wchar_t *unicode_str);
 t_bool				ftpf_is_flag(const char c);
@@ -91,7 +85,6 @@ t_bool				ftpf_is_identifier(char const c);
 t_bool				ftpf_is_signed_conv(char c);
 t_bool				ftpf_is_unsigned_conv(char c);
 t_bool				ftpf_is_characters_conv(char c);
-t_bool				ftpf_is_float_conv(char c);
 int					ftpf_get_conv_base(char id);
 void				ftpf_initialize_specifiers(t_specifiers *specifiers);
 

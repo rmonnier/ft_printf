@@ -86,8 +86,6 @@ void	ftpf_get_length_specifier(char const **format, t_specifiers *specifiers)
 			specifiers->length.j++;
 		else if (**format == 'z')
 			specifiers->length.z++;
-		else if (**format == 'L')
-			specifiers->length.f++;
 		(*format)++;
 	}
 }

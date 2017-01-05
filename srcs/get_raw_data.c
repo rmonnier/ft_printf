@@ -48,8 +48,6 @@ char		*ftpf_get_raw_data(va_list ap, t_specifiers specifiers,
 		s = ftpf_convert_characters(ap, specifiers, size);
 	else if (specifiers.identifier == 'n')
 		s = n_conv(ap, specifiers.length, size, n);
-	else if (ftpf_is_float_conv(specifiers.identifier))
-		s = ftpf_convert_float(ap, specifiers, size);
 	else
 	{
 		s = ft_strndup(&(specifiers.identifier), 1);

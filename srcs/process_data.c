@@ -53,8 +53,6 @@ void		ftpf_process_data(char **data, int *size, t_specifiers specifiers)
 		ftpf_process_signed(data, size, specifiers);
 	else if (ftpf_is_characters_conv(specifiers.identifier))
 		ftpf_process_characters(data, size, specifiers);
-	else if (ftpf_is_float_conv(specifiers.identifier))
-		ftpf_process_float(data, size, specifiers);
 	else
 	{
 		if (specifiers.width > 0)
