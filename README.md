@@ -18,7 +18,10 @@ Don't forget to include libftprint.h
 
 ## Supported options
 
-Flags : #, 0, -, ' ', + ;
+Flags : #, 0, -, ' ', +
+
 Width and precision
-Length : ll, l, h, hh ;
+
+Length : ll, l, h, hh
+
 Identifiers : c, C, s, S, d, D, i, u, U, x, X, o, O, b, B, %, n
